@@ -1,0 +1,347 @@
+term	strength	rank
+chiroptera	28	1
+neotropical region	37	2
+quaternary drainage	39	3
+brachyteles hypoxanthus	46	4
+community dynamics	49	5
+conservation management	50	6
+elliottii engelm	51	7
+habitat restoration	53	8
+regression analysis	55	9
+anthropogenic effect	58	10
+frugivory	59	11
+tropical environment	60	12
+palynology	66	13
+above ground biomass	67	14
+ocotea odorifera	70	15
+ecosystem resilience	73	16
+plantation forestry	73	16
+forest ecology	75	18
+landscape ecology	77	19
+economics	80	20
+environmental monitoring	81	21
+restoration ecology	81	21
+attalea phalerata	82	23
+comparative study	83	24
+taxonomy	85	25
+swietenia macrophylla	96	26
+spatial analysis	99	27
+tropical climate	99	27
+isoptera	103	29
+riparian ecosystem	108	30
+physiology	113	31
+water quality	116	32
+manilkara huberi	129	33
+floristics	137	34
+environmental restoration	144	35
+espirito santo	145	36
+mimosa tenuiflora	147	37
+global warming	150	38
+geography	157	39
+human activity	157	39
+family farmers	159	41
+parque estadual	161	42
+adaptive management	166	43
+photosynthesis	171	44
+landsat thematic mapper	172	45
+bolivia	173	46
+nitrogen fixation	175	47
+united states	175	47
+arecaceae	178	49
+bos	178	49
+population dynamics	182	51
+environmental protection	183	52
+population density	183	52
+satellite imagery	184	54
+carbon dioxide	187	55
+corymbia citriodora	195	56
+microbial activity	195	56
+ecotone	200	58
+decision making	201	59
+reduced-impact logging	201	59
+soil fauna	204	61
+bertholletia excelsa	207	62
+infiltration	207	62
+endangered species	208	64
+seed predation	211	65
+afforestation	212	66
+bioindicator	212	66
+hydraulic conductivity	212	66
+humans	213	69
+mimosa scabrella	215	70
+artificial perches	219	71
+federal district	223	72
+tropical rain forest	225	73
+amazonas	226	74
+landscape change	226	74
+vegetation dynamics	227	76
+habitat structure	229	77
+clearcutting	230	78
+terra firme	230	78
+land degradation	232	80
+female	236	81
+sustainable development	237	82
+multivariate analysis	239	83
+euterpe edulis	239	83
+demography	240	85
+urbanization	241	86
+habitat fragmentation	246	87
+semiarid region	249	88
+hymenoptera	263	89
+phenology	288	90
+sustainable forest management	288	90
+chemistry	298	92
+environmental degradation	298	92
+permanent preservation	301	94
+melastomataceae	308	95
+rondonia	315	96
+cluster analysis	318	97
+conservation status	320	98
+forest landscape restoration	320	98
+holocene	320	98
+rubiaceae	333	101
+seedling establishment	344	102
+procedures	347	103
+silviculture	347	103
+formicidae	354	105
+paragominas	356	106
+peru	365	107
+abandoned land	369	108
+habitat loss	371	109
+seedling emergence	371	109
+seasonal variation	378	111
+thematic mapper	380	112
+environmental impact	385	113
+soil carbon	394	114
+forest inventory	396	115
+forest fragmentation	401	116
+poaceae	402	117
+ecological indicators	407	118
+male	407	118
+revegetation	419	120
+forest soil	430	121
+invasive species	447	122
+nutrient cycling	458	123
+selective logging	460	124
+arbuscular mycorrhiza	467	125
+land use change	467	125
+population structure	471	127
+bamboo	481	128
+manaus	494	129
+herbivory	502	130
+phytosociology	513	131
+community assembly	517	132
+soil quality	532	133
+carbon storage	539	134
+leaf litter	551	135
+forest dynamics	552	136
+semiarid	559	137
+seasonality	563	138
+facilitation	564	139
+ecological groups	610	140
+south america	615	141
+vismia	617	142
+pernambuco	620	143
+riparian forests	621	144
+adaptation	631	145
+atlantic rain forest	638	146
+mimosa	652	147
+environmental factor	654	148
+soil organic matter	662	149
+organic carbon	669	150
+araucaria angustifolia	671	151
+tree planting	675	152
+spatial distribution	682	153
+land-use change	688	154
+shifting cultivation	704	155
+fungi	711	156
+ecosystem restoration	717	157
+floristic similarity	719	158
+secondary vegetation	720	159
+amazon basin	744	160
+functional groups	747	161
+community composition	748	162
+litterfall	751	163
+drought	760	164
+landscape restoration	775	165
+woody plant	783	166
+slash-	785	167
+watershed	790	168
+mapping	808	169
+parana	811	170
+nucleation	815	171
+protected area	816	172
+phosphorus	818	173
+carbon sequestration	825	174
+sao paulo	834	175
+araucaria forest	848	176
+myrtaceae	851	177
+connectivity	878	178
+cecropia	889	179
+forest ecosystem	923	180
+fires	934	181
+remote sensing	947	182
+fabaceae	951	183
+animals	990	184
+community structure	991	185
+vegetation cover	1007	186
+functional traits	1035	187
+soil seed bank	1074	188
+environmental conditions	1077	189
+aging	1091	190
+harvesting	1109	191
+seed rain	1114	192
+grassland	1118	193
+active restoration	1138	194
+diversity index	1143	195
+plant community	1165	196
+rio de janeiro	1171	197
+germination	1175	198
+birds	1187	199
+seasons	1190	200
+growth rate	1202	201
+functional diversity	1209	202
+sustainability	1241	203
+article	1251	204
+agroforestry	1272	205
+passive restoration	1276	206
+seed dispersal	1307	207
+rain forest	1345	208
+land cover	1356	209
+riparian forest	1382	210
+landsat	1397	211
+tropical dry forest	1398	212
+nitrogen	1447	213
+cultivation	1452	214
+minas gerais	1479	215
+forest management	1485	216
+soil fertility	1486	217
+classification	1488	218
+ecology	1532	219
+araucaria	1538	220
+aves	1538	220
+vegetation structure	1547	222
+biodiversity conservation	1557	223
+agricultural land	1574	224
+ecosystem function	1580	225
+bird	1583	226
+aboveground biomass	1614	227
+tropics	1622	228
+forest recovery	1638	229
+nutrients	1661	230
+deciduous forest	1664	231
+adult	1672	232
+eucalyptus	1674	233
+fragmentation	1688	234
+climate change	1702	235
+colonization	1707	236
+caatinga	1724	237
+seed bank	1734	238
+savanna	1757	239
+reforestation	1793	240
+forest structure	1798	241
+timber	1842	242
+degraded areas	1871	243
+rivers	1875	244
+cattle	1877	245
+resilience	1899	246
+animal	1953	247
+gis	2005	248
+pioneer species	2007	249
+mortality	2029	250
+logging	2045	251
+species diversity	2057	252
+chronosequence	2060	253
+regrowth	2077	254
+forest cover	2111	255
+survival	2125	256
+brazilian atlantic forest	2151	257
+recruitment	2177	258
+forestry	2191	259
+old-growth forest	2208	260
+cerrado	2231	261
+ecological succession	2267	262
+dry forest	2275	263
+native species	2294	264
+forest succession	2369	265
+understory	2435	266
+fire	2440	267
+rainforest	2567	268
+brazilian amazon	2628	269
+mining	2736	270
+ecological restoration	2739	271
+degradation	2744	272
+monitoring	2772	273
+biome	2781	274
+ecosystem services	2810	275
+ecosystem service	2952	276
+agriculture	2965	277
+floristic composition	2972	278
+successional stages	3005	279
+dispersal	3118	280
+dominance	3155	281
+forest regeneration	3173	282
+seeds	3207	283
+soils	3236	284
+herb	3291	285
+sampling	3305	286
+grass	3376	287
+climate	3708	288
+basal area	3833	289
+shrub	3841	290
+species composition	3917	291
+deforestation	4056	292
+secondary succession	4145	293
+development	4173	294
+tropical forests	4225	295
+human	4422	296
+water	4455	297
+forest restoration	4480	298
+ecosystems	4568	299
+land use	4603	300
+plantation	4778	301
+secondary forests	4805	302
+carbon	4909	303
+disturbance	5152	304
+plants	5273	305
+biomass	5335	306
+amazonia	5704	307
+floristic	5893	308
+species richness	6099	309
+seedling	6149	310
+season	6162	311
+dynamics	6175	312
+wood	6216	313
+abundance	6349	314
+biodiversity	6931	315
+tropical forest	6980	316
+management	7218	317
+secondary forest	7226	318
+atlantic forest	7445	319
+conservation	7469	320
+pasture	7513	321
+recovery	7529	322
+landscape	8241	323
+para	8660	324
+rain	8755	325
+density	9484	326
+trees	9489	327
+amazon	9580	328
+richness	9744	329
+ecosystem	9911	330
+seed	9949	331
+growth	10473	332
+restoration	11442	333
+structure	11757	334
+soil	12385	335
+vegetation	12491	336
+natural regeneration	13116	337
+succession	15465	338
+diversity	16000	339
+forests	17068	340
+plant	17810	341
+regeneration	17969	342
+tree	18177	343
+brazil	23932	344
+ant	32373	345
+forest	33556	346
