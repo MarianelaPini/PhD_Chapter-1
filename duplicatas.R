@@ -13,9 +13,9 @@ library(openxlsx)
 library(dplyr)
 #Tentei instalar litsearchr mas nao funcionou, entao instalei pelo github
 library(remotes)
-search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search")
+search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test")
 #importamos os dados
-naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search", verbose = TRUE)
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test", verbose = TRUE)
 colnames(naiveimport)
 #Remover duplicatas
 naive_results <- 
@@ -23,6 +23,101 @@ naive_results <-
 nrow(naive_results)
 naive_results
 colnames(naive_results)
+write.xlsx (naive_results, "naiveeresults.xlsx")
+#Criando uma planilha da busca sem regenerant*, para teste
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_resultsnoreg <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_resultsnoreg)
+naive_resultsnoreg
+colnames(naive_resultsnoreg)
+write.xlsx (naive_resultsnoreg, "naiveeresultsnoreg.xlsx")
+#Criando uma planilha da busca com regenerant*
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_resultsreg <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_resultsreg)
+naive_resultsreg
+colnames(naive_resultsreg)
+write.xlsx (naive_resultsreg, "naiveeresultsreg.xlsx")
+#teste com secondar* forest
+library(remotes)
+search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test/secondary forest")
+#importamos os dados
+# Nesses dados coloquei as duas buscas de WoS, com secondary forest e sem
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test/secondary forest", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_results <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_results)
+naive_results
+colnames(naive_results)
+write.xlsx (naive_results, "naiveeresults_secforest.xlsx")
+#Criando uma planilha da busca sem secondar* forest, para teste, para saber quantos são e comparar
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test/secondary forest", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_resultsnosec <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_resultsnosec)
+naive_resultsnosec
+colnames(naive_resultsnosec)
+write.xlsx (naive_resultsnosec, "naiveeresultsnosec.xlsx")
+#Criando uma planilha da busca com secondary forest para checar*
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test/secondary forest", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_resultssec <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_resultssec)
+naive_resultssec
+colnames(naive_resultssec)
+write.xlsx (naive_resultssec, "naiveeresultssec.xlsx")
+#Sorteio para avaliar quem são os artigos que aparecem na busca com secondary forest*
+numeros_sorteados <- sample(1:725, 100, replace = FALSE)
+print(numeros_sorteados)
+sort(numeros_sorteados)
+
+#Sorteio para avaliar quem são os artigos que aparecem na busca com regenerant*
+numeros_sorteados <- sample(1:1915, 100, replace = FALSE)
+print(numeros_sorteados)
+sort(numeros_sorteados)
+
+##script mari
+####conferencia pontos
+
+local2 <- "G:/Other computers/Dell Eclipse/Doutorado/Analise_de_dados/"
+
+data <- read.table("Data_doc2.txt",  sep="\t", header = T)
+n_species <- length(unique(data$Species))
+sp <- sort(unique(data$Species))
+
+#criando a lista das especies q quero comparar
+
+especie_name1 <- sp[[1]]
+especie1 <- data[data$Species==especie_name1,]
+
+especie_name2 <- sp[[19]]
+especie2 <- data[data$Species==especie_name2,]
+
+
+a <- especie1$Site_study
+b <- especie2$Site_study
+
+#comparando pontos entre especies
+pontos_dif <- setdiff(a, b)
+View(pontos_dif)
+
+#intersect(a,b)
+
+write.table(pontos_dif,"C:/Documentos/Doutorado/Analise_de_dados/complist.csv", sep=",",dec=".")
+
+##Tentativas para melhorar as palavras chaves na busca
 #titulo do primeiro trabalho
 naive_results[1, "title"]
 #two differents ways of searching of new terms
@@ -35,10 +130,10 @@ extract_terms(keywords=naive_results[, "keywords"], method="tagged")
 #min_freq=2. Only get keywords that appear at least twice in the full set of results. This is good for making sure that we are only getting keywords that are related to more than just one article in our field of interest. But it might also miss out some important extra suggestions.
 #min_n=2. Only get keywords that consist of at least two words. This is why we only see multi-word phrases in the keywords we just got.
 #max_n=5. Get keywords up to five words long. Maybe this is longer than we need.
-keywords <- extract_terms(keywords=naive_results[, "keywords"], method="tagged", min_n=1,min_freq=10)
+keywords <- extract_terms(keywords=naive_results[, "keywords"], method="tagged", min_n=1,min_freq=20)
 keywords
 #extract by title
-title_keywords<-extract_terms(text=naive_results[, "title"], method="fakerake", min_freq=10, min_n=1)
+title_keywords<-extract_terms(text=naive_results[, "title"], method="fakerake", min_freq=20, min_n=1)
 title_keywords
 all_stopwords <- c(get_stopwords("English"), title_keywords)
 title_terms <- extract_terms(
@@ -70,6 +165,7 @@ plot<-ggraph(g, layout="stress") +
   geom_edge_link(aes(alpha=weight)) +
   geom_node_point(shape="circle filled", fill="white") +
   geom_node_text(aes(label=name), hjust="outward", check_overlap=TRUE) 
+plot
 #ranking
 install.packages("igraph")
 library(igraph)
@@ -80,6 +176,7 @@ data.frame(term=names(strengths), strength=strengths, row.names=NULL) %>%
   arrange(strength) ->
   term_strengths
 term_strengths
+View(term_strengths)
 write.table(term_strengths, "terms_strengths.txt", sep="\t", row.names=FALSE, quote=FALSE)
 #check terms united
 cutoff_fig <- ggplot(term_strengths, aes(x=rank, y=strength, label=term)) +
@@ -88,3 +185,11 @@ cutoff_fig <- ggplot(term_strengths, aes(x=rank, y=strength, label=term)) +
   geom_text(data=filter(term_strengths, rank>5), hjust="right", nudge_y=20, check_overlap=TRUE)
 
 cutoff_fig
+
+# Definindo as datas
+data_inicial <- as.Date("2003-03-18")
+data_final <- as.Date("2005-06-30")
+
+# Calculando o número de dias
+dias <- as.numeric(data_final - data_inicial)
+dias
