@@ -13,9 +13,19 @@ library(openxlsx)
 library(dplyr)
 #Tentei instalar litsearchr mas nao funcionou, entao instalei pelo github
 library(remotes)
-search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test")
+install.packages(c(
+  "igraph",
+  "dplyr",
+  "tidytext",
+  "ggplot2",
+  "tm",
+  "stringr",
+  "SnowballC"
+))
+remotes::install_github("elizagrames/litsearchr")
+search_directory<-("C:/Users/maria/OneDrive/Documentos/PhD_Chapter-1/search/28-07")
 #importamos os dados
-naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test", verbose = TRUE)
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive/Documentos/PhD_Chapter-1/search/28-07", verbose = TRUE)
 colnames(naiveimport)
 #Remover duplicatas
 naive_results <- 
@@ -193,3 +203,35 @@ data_final <- as.Date("2005-06-30")
 # Calculando o número de dias
 dias <- as.numeric(data_final - data_inicial)
 dias
+
+##Busca Scielo
+#importamos os dados
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive/Documentos/PhD_Chapter-1/search/Scielo", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_results <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naiveimport)
+naive_results
+colnames(naive_results)
+write.xlsx (naiveimport, "BuscaScielo.xlsx")
+#Agora uma vez que juntei em uma planilha só os dados do scielo e a busca anterior vou adicionar aqui a planilha
+search_directory<-("C:/Users/maria/OneDrive/Documentos/PhD_Chapter-1/search/Scielo")
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive/Documentos/PhD_Chapter-1/search/Scielo", verbose = TRUE)
+colnames(naiveimport)
+##não funcionou abrir o arquivo pelo litsearchr, mas ai abri o csv manualmente, 
+# e apos isso removo as duplicatas, porque estava dando problema para abrir o 
+#csv
+scielo <- read.csv("scielo_busca.csv",
+                   sep = ",",
+                   quote = "\"",
+                   fill = TRUE,
+                   stringsAsFactors = FALSE)
+#Remover duplicatas apos ler a planilha, que tem o wos que são os artigos que ja 
+#estao sendo triados e o scielo que sao os novos, no grupo
+naive_results <- 
+  litsearchr::remove_duplicates(scielo, field = "title", method = "string_osa")
+nrow(naive_results)
+naive_results
+colnames(naive_results)
+write.xlsx (naive_results, "Buscatotal.xlsx")
