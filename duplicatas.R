@@ -11,6 +11,7 @@ library(synthesisr)
 library(data.table)
 library(openxlsx)
 library(dplyr)
+install.packages("Rtools")
 #Tentei instalar litsearchr mas nao funcionou, entao instalei pelo github
 library(remotes)
 search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/test")
@@ -87,8 +88,47 @@ sort(numeros_sorteados)
 numeros_sorteados <- sample(1:1915, 100, replace = FALSE)
 print(numeros_sorteados)
 sort(numeros_sorteados)
+#Remover duplicatas para busca com todos os termos, 28-07, em WoS e Scopus
+library(remotes)
+search_directory<-("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07")
+#importamos os dados
+# Nesses dados coloquei as duas buscas, em Wos e em Scopus
+naiveimport<-litsearchr::import_results(directory = "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07", verbose = TRUE)
+colnames(naiveimport)
+#Remover duplicatas
+naive_results <- 
+  litsearchr::remove_duplicates(naiveimport, field = "title", method = "string_osa")
+nrow(naive_results)
+naive_results
+colnames(naive_results)
+write.csv(naive_results, "naiveeresults_secforest28-07.csv")
+write.xlsx (naive_results, "naiveresults_secforest28-07.xlsx")
+####
+####
 
 ##script mari
+#ja triados, colocar na nova planilha
+#A planilha tem os artigos novos, e os artigos já triados, todos juntos
+
+local2 <- "C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search"
+data<- read_excel("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/hola.xlsx") 
+#criando a lista das especies q quero comparar
+#nessa lista vão ser os trabalhos que já foram triados
+lista1 <- data[data$grupo=="triado",]
+#nessa lista vão ser os trabalhos novos
+lista2 <- data[data$grupo=="novo",]
+#Crio objetos para ter só os titulos de cada grupo
+a <- lista1$title
+b <- lista2$title
+
+#comparando pontos entre grupos, triados e novos
+pontos_dif <- setdiff(a,b)
+View(pontos_dif)
+pontos_dif
+#intersect(a,b)
+
+write.table(pontos_dif,"C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/complist.csv", sep=",",dec=".")
+
 ####conferencia pontos
 
 local2 <- "G:/Other computers/Dell Eclipse/Doutorado/Analise_de_dados/"
@@ -193,3 +233,192 @@ data_final <- as.Date("2005-06-30")
 # Calculando o número de dias
 dias <- as.numeric(data_final - data_inicial)
 dias
+####Atualizando a planilha, os triados e os 4194 do WoS e Scopus
+##Criei uma planilha .csv, com uma coluna de triado e novo
+#Agora vou remover os duplicados
+library(remotes)
+library(litsearchr)
+library(dplyr)
+# Specify the directory
+search_directory <-"C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1"
+#Lendo a planilha
+tudo <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/tudo_corrigido.csv",
+                 header = TRUE,
+                 sep = ",",
+                 stringsAsFactors = TRUE,
+                 na.strings = "NA",
+                 strip.white = TRUE)
+head(tudo)
+nrow(tudo) 
+#Remover as duplicatas
+tudo.dedupli <-litsearchr::remove_duplicates(tudo, field = "title", method = "string_osa")
+nrow(tudo.dedupli)
+#Salvar o arquivo 
+write.csv(tudo.dedupli, "tudo.dedupli.csv")
+####Triando sistemáticamente os de solo
+###Lendo a planilha que tem todos os de solo e o tree
+tree <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/soil_tudo.csv",
+                 header = TRUE,
+                 sep = ",",
+                 stringsAsFactors = TRUE,
+                 na.strings = "NA",
+                 strip.white = TRUE)
+head(tree)
+nrow(tree) 
+#Remover as duplicatas
+tudo.deduplitree <-litsearchr::remove_duplicates(tree, field = "title", method = "string_osa")
+nrow(tudo.deduplitree)
+#Salvar o arquivo 
+write.csv(tudo.deduplitree,"tre.dedupli.csv")
+#Agora vou colocar os de plant, com os que não tem tree, os que sobram, vai ser soil sem tree sem plant
+plant <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/tree_dedupli_plant.csv",
+                 header = TRUE,
+                 sep = ",",
+                 stringsAsFactors = TRUE,
+                 na.strings = "NA",
+                 strip.white = TRUE)
+#Remover as duplicatas
+tudo.dedupliplant <-litsearchr::remove_duplicates(plant, field = "title", method = "string_osa")
+nrow(tudo.dedupliplant)
+#Salvar o arquivo 
+write.csv(tudo.dedupliplant,"tudo.dedupliplant.csv")
+#Agora vou colocar os de vegetation, com os que não tem tree,não tem plant, os que sobram, vai ser soil sem tree sem plant sem vegetation
+veg <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/tudo_dedupliveg.csv",
+                  header = TRUE,
+                  sep = ",",
+                  stringsAsFactors = TRUE,
+                  na.strings = "NA",
+                  strip.white = TRUE)
+#Remover as duplicatas
+tudo.dedupliveg <-litsearchr::remove_duplicates(veg, field = "title", method = "string_osa")
+nrow(tudo.dedupliveg)
+#Salvar o arquivo 
+write.csv(tudo.dedupliveg,"tudo.dedupliveg.csv")
+#Agora vou colocar os de só solo com o total, para colocar o resto como veg/tree/plant
+justsoil <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/just_soil.csv",
+                header = TRUE,
+                sep = ",",
+                stringsAsFactors = TRUE,
+                na.strings = "NA",
+                strip.white = TRUE)
+#Remover as duplicatas
+tudo.dedupli <-litsearchr::remove_duplicates(justsoil, field = "title", method = "string_osa")
+nrow(tudo.dedupli)
+#Salvar o arquivo 
+write.csv(tudo.dedupli,"tudo.dedupli.csv")
+#Agora tenho a planilha com os triados e vou colocar os de solo, pra saber quais são de solo, quais triados
+#não deu certo, então um por um, vendo quais triados são "soil" e apago esses
+triadossoil <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/soil_triagem.csv",
+                     header = TRUE,
+                     sep = ",",
+                     stringsAsFactors = TRUE,
+                     na.strings = "NA",
+                     strip.white = TRUE)
+#Remover as duplicatas
+tudo.dedupli <-litsearchr::remove_duplicates(triadossoil, field = "title", method = "string_osa")
+nrow(tudo.dedupli)
+#Salvar o arquivo 
+write.csv(tudo.dedupli,"triados_soil.csv")
+#não deu certo,Agora um por um, vendo quais triados são "plant/tree/veg" e apago esses
+triadosplant <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/triados_plant.csv",
+                        header = TRUE,
+                        sep = ",",
+                        stringsAsFactors = TRUE,
+                        na.strings = "NA",
+                        strip.white = TRUE)
+#Remover as duplicatas
+triadoplant.dedupli <-litsearchr::remove_duplicates(triadosplant, field = "title", method = "string_osa")
+nrow(triadoplant.dedupli)
+#Salvar o arquivo 
+write.csv(triadoplant.dedupli,"triados_plant.csv")
+#Finalmente junto os de soil e os novos,agora pensando os de planta vou ler, então não precisa
+soil_novos <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/novo_soil.csv",
+                         header = TRUE,
+                         sep = ",",
+                         stringsAsFactors = TRUE,
+                         na.strings = "NA",
+                         strip.white = TRUE)
+#Remover as duplicatas
+soil_novosdedupli <-litsearchr::remove_duplicates(soil_novos, field = "title", method = "string_osa")
+nrow(soil_novosdedupli)
+#Salvar o arquivo 
+write.csv(soil_novosdedupli,"soil_novos.csv")
+#Agora mesmo procedimento com os de Scopus, soil com plant, soil 1544, plant 1275
+plantscopus <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/Tudo_soil_plant_scopus.csv",
+                  header = TRUE,
+                  sep = ",",
+                  stringsAsFactors = TRUE,
+                  na.strings = "NA",
+                  strip.white = TRUE)
+plantscopus
+#Remover as duplicatas
+tudo.dedupliplant <-litsearchr::remove_duplicates(plantscopus, field = "Title", method = "string_osa")
+nrow(tudo.dedupliplant)
+#Salvar o arquivo 
+write.csv(tudo.dedupliplant,"dedupliplant_scopus.csv")
+#Agora mesmo procedimento com os de Scopus, soil com veg, sem plant
+vegscopus <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/veg_scopus.csv",
+                        header = TRUE,
+                        sep = ",",
+                        stringsAsFactors = TRUE,
+                        na.strings = "NA",
+                        strip.white = TRUE)
+#Remover as duplicatas
+tudo.dedupliveg <-litsearchr::remove_duplicates(vegscopus, field = "Title", method = "string_osa")
+nrow(tudo.dedupliveg)
+#Salvar o arquivo 
+write.csv(tudo.dedupliveg,"dedupliveg_scopus.csv")
+#Agora mesmo procedimento com os de Scopus, soil com tree, sem plant, sem veg
+treescopus <- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/tree_scopus.csv",
+                      header = TRUE,
+                      sep = ",",
+                      stringsAsFactors = TRUE,
+                      na.strings = "NA",
+                      strip.white = TRUE)
+#Remover as duplicatas
+tudo.deduplitree <-litsearchr::remove_duplicates(treescopus, field = "Title", method = "string_osa")
+nrow(tudo.deduplitree)
+#Salvar o arquivo 
+write.csv(tudo.deduplitree,"deduplitree_scopus.csv")
+#Agora vou comparar só solo na WoS e no Scopus
+compsw<- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/comp_wos_scopus.csv",
+                       header = TRUE,
+                       sep = ",",
+                       stringsAsFactors = TRUE,
+                       na.strings = "NA",
+                       strip.white = TRUE)
+#Remover as duplicatas
+tudo.deduplicompsw <-litsearchr::remove_duplicates(compsw, field = "title", method = "string_osa")
+nrow(tudo.deduplicompsw)
+#Salvar o arquivo 
+write.csv(tudo.deduplicompsw,"comp_wos_scopus.csv")
+#Agora adicionar os de scopus (FORAM 36) na planilha com os novos sem triagem
+novosscopus<- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/novos_scopus.csv",
+                  header = TRUE,
+                  sep = ",",
+                  stringsAsFactors = TRUE,
+                  na.strings = "NA",
+                  strip.white = TRUE)
+#Remover as duplicatas
+tudo.deduplisscopus<-litsearchr::remove_duplicates(novosscopus, field = "title", method = "string_osa")
+nrow(tudo.deduplisoil)
+#Salvar o arquivo 
+write.csv(tudo.deduplisoil,"novos_soil_scopus.csv")
+#na verdade junto com os de WoS, adicionar eles, de scopus, e os novos
+novossoil<- read.csv("C:/Users/maria/OneDrive - Questindustries/Documentos/Brasil/Doutorado/R/PhD_Chapter-1/search/28-07-soil/novos_soil_wosscopus.csv",
+                     header = TRUE,
+                     sep = ",",
+                     stringsAsFactors = TRUE,
+                     na.strings = "NA",
+                     strip.white = TRUE)
+#Remover as duplicatas
+tudo.deduplisoil<-litsearchr::remove_duplicates(novossoil, field = "title", method = "string_osa")
+nrow(tudo.deduplisoil)
+#Salvar o arquivo 
+write.csv(tudo.deduplisoil,"novos_soil_wos_scopus.csv")
+#Sorteio para checar dos 434 de just soil, os titulos, 86, ver se é só solo mesmo
+numeros_sorteados <- sample(1:2790, 2790, replace = FALSE)
+print(numeros_sorteados)
+sort(numeros_sorteados)
+saving<-data.frame(numeros_sorteados)
+write.csv(saving, "numerossorteados.csv")
